@@ -6,29 +6,38 @@ const JokeList = ({length}) => {
     //set jokes array in state
     const [jokes, setJokes] = useState([]);
 
-    //ok, now here's where things get crazy. this is when i'm going to have to use useEffect. blugh!
-
-    //to begin, we'll just try it with one. then we'll worry about the rest
     useEffect(function() {
         async function getJokes() {
-            const resp = await axios.get(`https://icanhazdadjoke.com`, {
-                headers: { Accept: "application/json" }
-              });
-              console.log(resp.data);
-              setJokes(resp.data)
+            try {
+                    const resp = (await axios.get(`https://icanhazdadjoke.com`, {
+                        headers: { Accept: "application/json" }
+                    })).data.joke;
+                    console.log(jokes);
+                    setJokes(j => [...j, resp]);
+
+            } catch (error) {
+                console.log(error);
+            }
         }
-        getJokes()
-    }, [])
+        if(jokes.length < length) {
+            getJokes()
+        }
+    }, [jokes, setJokes])
+
+    function newJokes() {
+        setJokes([]);
+    }
 
     return(
         <div>
-            <Joke text={jokes}/>
+            <button onClick={newJokes}>New Jokes</button>
+            {jokes.map(j => <Joke text={j}/>)}
         </div>
     )
 }
 
 JokeList.defaultProps = {
-    length: 1
+    length: 10
 };
 
 export default JokeList
