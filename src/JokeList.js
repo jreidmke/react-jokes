@@ -8,7 +8,23 @@ const JokeList = ({length}) => {
 
     //ok, now here's where things get crazy. this is when i'm going to have to use useEffect. blugh!
 
-    //to begin, we'll just try it with 
+    //to begin, we'll just try it with one. then we'll worry about the rest
+    useEffect(function() {
+        async function getJokes() {
+            const resp = await axios.get(`https://icanhazdadjoke.com`, {
+                headers: { Accept: "application/json" }
+              });
+              console.log(resp.data);
+              setJokes(resp.data)
+        }
+        getJokes()
+    }, [])
+
+    return(
+        <div>
+            <Joke text={jokes}/>
+        </div>
+    )
 }
 
 JokeList.defaultProps = {
