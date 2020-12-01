@@ -1,11 +1,3 @@
-// First thing we're going to do is 	build Joke.js and JokeList.js.
-
-// Joke.js is a pretty simple component.
-
-// 2 states (like, dislike) both bools. That means we'll need to pass in some function props. handleLike, handleDislike and pass em in to the buttons. As arrow funcs!
-
-// And then the text should be passed in as prop too.
-
 import {useState} from 'react';
 
 const Joke = (handleLike, handleDislike, text) => {
