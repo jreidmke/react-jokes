@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import "./Joke.css";
 
 const Joke = ({handleLike, handleDislike, text}) => {
     const [like, setLike] = useState(false);
@@ -30,11 +31,11 @@ const Joke = ({handleLike, handleDislike, text}) => {
 	}
 
 	return(
-        <li>
+        <div id='joke'>
             <button onClick={()=>handleDislike()}>Dislike</button>
-            <p onClick={()=>handleNeutral()} style={{color:color}}>{text}</p>
+                <p onClick={()=>handleNeutral()} style={{color:color}}>{text}</p>
             <button onClick={() =>handleLike()}>Like</button>
-        </li>
+        </div>
     )
 }
 
