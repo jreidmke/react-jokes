@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-const Joke = (handleLike, handleDislike, text) => {
+const Joke = ({handleLike, handleDislike, text}) => {
     const [like, setLike] = useState(false);
     const [dislike, setDislike] = useState(false);
 
@@ -12,6 +12,11 @@ const Joke = (handleLike, handleDislike, text) => {
 	function handleDislike() {
 		setDislike(true)
 		setLike(false)
+    }
+
+    function handleNeutral() {
+        setDislike(false);
+        setLike(false);
     }
 
     let color;
@@ -27,8 +32,8 @@ const Joke = (handleLike, handleDislike, text) => {
 	return(
         <li>
             <button onClick={()=>handleDislike()}>Dislike</button>
+            <p onClick={()=>handleNeutral()} style={{color:color}}>{text}</p>
             <button onClick={() =>handleLike()}>Like</button>
-            <p style={{color:color}}>{text}</p>
         </li>
     )
 }
